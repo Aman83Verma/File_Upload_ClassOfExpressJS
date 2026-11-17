@@ -19,10 +19,11 @@ database.dbConnect();
 const cloudinary = require("./config/cloudinary");
 cloudinary.cloudinaryConnect();
 
-
 // Mounting API Routes
-
-
+const Upload = require("./routes/FileUpload");
+app.use("app/v1/upload", Upload);
 
 // Activating Server
-
+app.listen(PORT, () => {
+    console.log(`App is running Successfully at Port Number : ${PORT}`);
+})
