@@ -5,7 +5,7 @@ exports.localFileUpload = async (req, res) => {
         const file = req.files.file;
         console.log("File is Available ", file);
 
-        let path = __dirname + "/files/" + Date.now();
+        let path = __dirname + "/files/" + `${file.name.split(".")[0]}` + `.${file.name.split(".")[1]}`;
         console.log("Path is Available ", path);
         
         file.mv(path, (err) => {
@@ -18,6 +18,7 @@ exports.localFileUpload = async (req, res) => {
         })
 
     } catch(error) {
+        console.log("Not able to upload the file on Server.");
         console.log(error);
     }
 }
