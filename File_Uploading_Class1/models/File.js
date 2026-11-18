@@ -8,6 +8,9 @@ const fileUpload = new mongoose.Schema({
     imageURL: {
         type: String
     },
+    videoURL: {
+        type: String
+    },
     tags: {
         type: String
     },
