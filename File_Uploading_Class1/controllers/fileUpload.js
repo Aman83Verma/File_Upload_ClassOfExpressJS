@@ -40,6 +40,9 @@ function isFileTypeSupported(type, supportedTypes){
 // 
 async function uploadFileToCloudinary(file, folder){
     const options = {folder};
+
+    console.log("Checking Temp File: ", file.tempFilePath);
+    
     return await cloudinary.uploader.upload(file.tempFilePath, options);
 }
 
