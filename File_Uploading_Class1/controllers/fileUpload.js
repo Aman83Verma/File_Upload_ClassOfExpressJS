@@ -57,7 +57,7 @@ exports.imageUpload = async (req, res) => {
         console.log(file);
 
         // Validation
-        const supportedTypes = ["jpg", "jpeg", "png"];
+        const supportedTypes = ["jpg", "jpeg", "png", "gif", "webp", ""];
         const fileType = file.name.split(".")[1].toLowerCase();
 
         // If File type is not Supported then..
@@ -80,6 +80,7 @@ exports.imageUpload = async (req, res) => {
 
         res.json({
             success: true,
+            imageURL: response.secure_url,
             message: "Image uploaded Successfully."
         })
 

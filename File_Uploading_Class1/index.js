@@ -4,7 +4,7 @@ const app = express();
 
 // Finding PORT Number
 require("dotenv").config();
-PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 // Adding the Middleware
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use(fileUpload({
 }));
 
 // Connection if DataBase
-const database = require("./config/databse");
+const database = require("./config/database");
 database.dbConnect();
 
 // Connecting Cloudinary
