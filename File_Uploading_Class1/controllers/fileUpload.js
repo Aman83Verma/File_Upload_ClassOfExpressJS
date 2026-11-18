@@ -74,7 +74,9 @@ exports.imageUpload = async (req, res) => {
         
 
         // Saving the Datas Entry into Databse
-
+        const fileData = await File.create({
+            name, tags, email, imageURL: response.secure_url
+        })
 
         res.json({
             success: true,
