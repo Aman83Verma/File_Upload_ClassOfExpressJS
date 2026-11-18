@@ -67,11 +67,24 @@ exports.imageUpload = async (req, res) => {
 
         // If File type is Supported then..
         const response = await uploadFileToCloudinary(file, "fileUploadClass"); // -> fileUploadClass folder is taken from Cloudinary website..
+        console.log(response);
+        
 
         // Saving the Datas Entry into Databse
-        
+
+
+        res.json({
+            success: true,
+            message: "Image uploaded Successfully."
+        })
+
         
     } catch(error){
+        console.log(error);
+        res.status(400).json({
+            success: false,
+            message: "Something went wrong."
+        })
 
     }
 }
