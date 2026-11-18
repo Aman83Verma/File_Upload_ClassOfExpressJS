@@ -38,10 +38,14 @@ function isFileTypeSupported(type, supportedTypes){
 
 
 // 
-async function uploadFileToCloudinary(file, folder){
+async function uploadFileToCloudinary(file, folder, quality){
     const options = {folder};
 
     console.log("Checking Temp File: ", file.tempFilePath);
+
+    if(quality){
+        options.quality = quality;
+    }
     
     // This will help to detect the file type automatically.
     options.resource_type = "auto";
@@ -153,6 +157,41 @@ exports.videoUploader = async (req, res) => {
 // Image Size Reducing Handler
 exports.imageSizeReducer = async (req, res) => {
     try{
+
+        // Fetching the data..
+        const {name, tags, email} = req.body;
+        console.log(name, tags, email);
+
+        const file = req.files.imageFile;
+        console.log(file);
+
+        // Validation
+        const supportedTypes = ["jpg", "jpeg", "png", "gif", "webp"];
+        const fileType = file.name.split(".")[1].toLowerCase();
+
+        // If File type is not Supported then..
+        if(!isFileTypeSupported(fileType, supportedTypes)){
+            return res.status(400).json({
+                success: false,
+                message: "File Type is not Supported.",
+            })
+        }
+
+        // If File type is Supported then..
+        const response = await uploadFileToCloudinary(file, "fileUploadClass", "auto:low"); // -> fileUploadClass folder is taken from Cloudinary website..
+        console.log(response);
+        
+
+        // Saving the Datas Entry into Databse
+        const fileData = await File.create({
+            name, tags, email, imageURL: response.secure_url
+        })
+
+        res.json({
+            success: true,
+            imageURL: response.secure_url,
+            message: "Image uploaded Successfully."
+        })
 
     } catch(error){
         console.log(error);
