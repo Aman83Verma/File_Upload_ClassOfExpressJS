@@ -176,6 +176,13 @@ exports.imageSizeReducer = async (req, res) => {
         const {name, tags, email} = req.body;
         console.log(name, tags, email);
 
+        const transformation = {
+            width: 1280,
+            height: 1280,
+            crop: "limit",
+            quality: "auto:good"
+        };
+
         const file = req.files.imageFile;
         console.log(file);
 
