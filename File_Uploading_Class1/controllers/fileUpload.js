@@ -37,20 +37,34 @@ function isFileTypeSupported(type, supportedTypes){
 }
 
 
-// 
-async function uploadFileToCloudinary(file, folder, quality){
-    const options = {folder};
+// async function uploadFileToCloudinary(file, folder, quality){
+//     const options = {folder};
 
-    console.log("Checking Temp File: ", file.tempFilePath);
+//     console.log("Checking Temp File: ", file.tempFilePath);
 
-    if(quality){
-        options.quality = quality;
-    }
+//     if(quality){
+//         options.quality = quality;
+//     }
     
-    // This will help to detect the file type automatically.
-    options.resource_type = "auto";
+//     // This will help to detect the file type automatically.
+//     options.resource_type = "auto";
 
-    return await cloudinary.uploader.upload(file.tempFilePath, options);
+//     return await cloudinary.uploader.upload(file.tempFilePath, options);
+// }
+
+
+async function uploadFileToCloudinary(file, folder, transformation = {}) {
+
+    const options = {
+        folder: folder,
+        resource_type: "auto",
+        transformation: transformation
+    };
+
+    return await cloudinary.uploader.upload(
+        file.tempFilePath,
+        options
+    );
 }
 
 
@@ -169,6 +183,7 @@ exports.imageSizeReducer = async (req, res) => {
         const supportedTypes = ["jpg", "jpeg", "png", "gif", "webp"];
         const fileType = file.name.split(".")[1].toLowerCase();
 
+        // TRY to add a upper limit of 5MB for Video.
         // If File type is not Supported then..
         if(!isFileTypeSupported(fileType, supportedTypes)){
             return res.status(400).json({
@@ -176,6 +191,8 @@ exports.imageSizeReducer = async (req, res) => {
                 message: "File Type is not Supported.",
             })
         }
+
+        // TRY to do Height, Width compress attributes.
 
         // If File type is Supported then..
         const response = await uploadFileToCloudinary(file, "fileUploadClass", "auto:low"); // -> fileUploadClass folder is taken from Cloudinary website..
