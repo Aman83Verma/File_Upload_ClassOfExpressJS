@@ -20,7 +20,7 @@ const tempDir = path.join(os.tmpdir(), "express-fileupload");
 fs.mkdirSync(tempDir, { recursive: true });
 app.use(fileUpload({
     useTempFiles : true,
-    tempFileDir : '/tmp/'
+    tempFileDir : tempDir
 }));
 
 // Connection if DataBase
