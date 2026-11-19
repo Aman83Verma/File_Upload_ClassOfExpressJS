@@ -202,7 +202,7 @@ exports.imageSizeReducer = async (req, res) => {
         // TRY to do Height, Width compress attributes.
 
         // If File type is Supported then..
-        const response = await uploadFileToCloudinary(file, "fileUploadClass", "auto:low"); // -> fileUploadClass folder is taken from Cloudinary website..
+        const response = await uploadFileToCloudinary(file, "fileUploadClass", transformation); // -> fileUploadClass folder is taken from Cloudinary website..
         console.log(response);
         
 

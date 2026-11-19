@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const fileUpload = new mongoose.Schema({
     name: {
         type: String,
-        requires: true
+        required: true
     },
     imageURL: {
         type: String
@@ -18,6 +18,6 @@ const fileUpload = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+});
 
 module.exports = mongoose.model("File", fileUpload);
