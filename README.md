@@ -357,52 +357,6 @@ module.exports = mongoose.model("File", fileUpload);
 
 Image and video URLs are optional because a document generally represents either an image or a video.
 
-## 🧪 API Testing
-
-All API endpoints can be tested using **Postman**.
-
-For image and video uploads:
-
-1. Open Postman.
-2. Select the `POST` request method.
-3. Enter the required API endpoint.
-4. Navigate to `Body → form-data`.
-5. Add the required text fields.
-6. Select the appropriate file field and change its type to `File`.
-7. Select the image or video from your local system.
-8. Click `Send` to execute the request.
-
-The application returns a JSON response containing the upload status, message, and corresponding Cloudinary URL where applicable.
-
-## 📚 Key Learning Outcomes
-
-Through this project, I gained practical experience with:
-
-- Building REST APIs using Express.js.
-- Understanding middleware and request handling.
-- Handling multipart/form-data using Express File Upload.
-- Working with local file storage and temporary file paths.
-- Integrating third-party cloud services using Cloudinary.
-- Implementing image resizing and quality optimization.
-- Uploading and managing images and videos.
-- Connecting MongoDB with Express.js using Mongoose.
-- Creating and managing Mongoose schemas and models.
-- Handling asynchronous operations using `async/await`.
-- Implementing basic file validation and error handling.
-- Testing backend APIs using Postman.
-
-## 🔮 Future Improvements
-
-- Implement file size restrictions and stronger file validation.
-- Add MIME-type verification and secure file-upload handling.
-- Implement authentication and authorization.
-- Add user-specific file management.
-- Implement file deletion from Cloudinary and MongoDB.
-- Support additional file formats.
-- Add pagination and filtering for uploaded files.
-- Implement configurable image resizing and compression options.
-- Improve error handling and upload progress tracking.
-
 ## 👨‍💻 Author
 
 **Aman Verma**
